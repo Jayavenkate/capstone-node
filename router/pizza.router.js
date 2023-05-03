@@ -4,7 +4,7 @@ import { auth } from "../middleware/auth.js";
 import { uuid } from "uuidv4";
 import Stripe from "stripe";
 const stripe = new Stripe(
-  "sk_test_51N2wUgSGE96adayZFAUisue5k9qzp6CVmJksFjUdBjqPf0v2aLtl3fciAy411XRIcIi67BSgeAYVke0PP1kQoWsy00ZjzDa0Gg"
+  process.env.stripe_key
 );
 const router = express.Router();
 router.get("/pizzalist", auth, async function (request, response) {

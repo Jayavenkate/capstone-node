@@ -23,11 +23,11 @@ router.post("/signup", async function (request, response) {
     if (userFromDb) {
       response.status(401).send({ message: "email already exists" });
     }
-    // else if (password.length < 8) {
-    //     response
-    //       .status(400)
-    //       .send({ message: "Password must be at least 8 characters" });
-    //   }
+    else if (password.length < 8) {
+        response
+          .status(400)
+          .send({ message: "Password must be at least 8 characters" });
+      }
     else {
       const hashedPassword = await generateHashedPassword(password);
       const result = await createUsers({
@@ -96,11 +96,11 @@ const userFromDb = await getUserByName(email);
 if (!userFromDb) {
   response.status(401).send({ message: "Invalid credentials" });
 }
-// else if (password.length < 8) {
-//       response
-//         .status(400)
-//         .send({ message: "Password must be at least 8 characters" });
-//     }
+else if (password.length < 8) {
+      response
+        .status(400)
+        .send({ message: "Password must be at least 8 characters" });
+    }
 else{
   const hashedPassword = await generateHashedPassword(password);
       const result = await updatePassword(email,hashedPassword);
