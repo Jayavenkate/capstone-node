@@ -9,7 +9,7 @@ router.get("/pizzalist", auth, async function (request, response) {
   try {
     const pizzalist = await getPizzas();
     response.send(pizzalist);
-    response.status(200).send({ message: "pizzalist successfully" });
+    // response.status(200).send({ message: "pizzalist successfully" });
   } catch (err) {
     response.status(401).send({ message: err });
   }
