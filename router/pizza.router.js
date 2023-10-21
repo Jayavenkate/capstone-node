@@ -3,14 +3,13 @@ import { getPizzas, createPizza } from "../service/pizza.service.js";
 import { auth } from "../middleware/auth.js";
 import { uuid } from "uuidv4";
 import Stripe from "stripe";
-const stripe = new Stripe(
-  process.env.stripe_key
-);
+const stripe = new Stripe(process.env.stripe_key);
 const router = express.Router();
 router.get("/pizzalist", auth, async function (request, response) {
   try {
     const pizzalist = await getPizzas();
     response.send(pizzalist);
+    response.status(200).send({ message: "pizzalist successfully" });
   } catch (err) {
     response.status(401).send({ message: err });
   }
@@ -22,6 +21,8 @@ router.post("/createpizza", async function (request, response) {
   response.send(result);
 });
 router.post("/payments", async function (request, response) {
+  // console.log(request.body);
+  // response.status(200).send({ message: "payment successfully" });
   try {
     const { item, totalPrice, token } = request.body;
     const transcationKey = uuid();
@@ -32,13 +33,14 @@ router.post("/payments", async function (request, response) {
         source: token.id,
       })
       .then((customer) => {
-        chargs.create({
+        charges.create({
           amount: totalPrice,
           currency: "inr",
           customer: customer.id,
           receipt_email: token.email,
           description: item.name,
         });
+
         response.status(200).send({ message: "payment successfully" });
       });
   } catch (err) {
@@ -46,4 +48,5 @@ router.post("/payments", async function (request, response) {
     response.status(400).send({ message: "payment not found" });
   }
 });
+
 export default router;

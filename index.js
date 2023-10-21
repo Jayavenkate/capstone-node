@@ -152,7 +152,20 @@ app.use("/", usersRourter);
 app.get("/", function (request, response) {
   response.send("🙋‍♂️, 🌏 🎊✨🤩");
 });
-
+// app.post("/generate-token", async (req, res) => {
+//   const { email } = req.body;
+//   const userFromDb = await client
+//     .db("b42wd2")
+//     .collection("users")
+//     .findOne({ email: email });
+//   console.log(userFromDb);
+//   if (userFromDb) {
+//     const randomToken = Math.random().toString(36).substring(7);
+//     response.status(200).send({ token: randomToken });
+//   } else {
+//     response.status(401).send({ message: "Invalid credentials" });
+//   }
+// });
 app.listen(PORT, () => console.log(`The server started in: ${PORT} ✨✨`));
 
 //generate hashed password
