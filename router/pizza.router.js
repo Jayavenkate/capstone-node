@@ -1,6 +1,6 @@
 import express from "express";
 import { getPizzas, createPizza } from "../service/pizza.service.js";
-import { auth } from "../middleware/auth.js";
+
 import { uuid } from "uuidv4";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.stripe_key);
