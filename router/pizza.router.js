@@ -5,7 +5,7 @@ import { uuid } from "uuidv4";
 import Stripe from "stripe";
 const stripe = new Stripe(process.env.stripe_key);
 const router = express.Router();
-router.get("/pizzalist", auth, async function (request, response) {
+router.get("/pizzalist", async function (request, response) {
   try {
     const pizzalist = await getPizzas();
     response.send(pizzalist);
