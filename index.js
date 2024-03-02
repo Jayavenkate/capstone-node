@@ -19,13 +19,8 @@ await client.connect();
 console.log("Mongo is connected !!!  ");
 
 app.use(express.json());
-// app.use(cors());
-app.use(
-  cors({
-    origin: "https://capstone-node.vercel.app"
-    
-  })
-);
+app.use(cors());
+
 app.use("/", pizzaRouter);
 app.use("/", usersRourter);
 
